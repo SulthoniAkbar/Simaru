@@ -8,7 +8,6 @@ import 'package:simaru/models/user_model.dart';
 // import 'package:simaru/models/user_model.dart';
 import 'package:simaru/provider/auth_provider.dart';
 import 'package:simaru/provider/booking_room_provider.dart';
-import 'package:simaru/provider/devision_provider.dart';
 import 'package:simaru/themes.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
@@ -30,6 +29,10 @@ class _FormPesanRuanganPagePageState extends State<FormPesanRuanganPage> {
   TextEditingController endDateController = TextEditingController(text: '');
   TextEditingController nameController = TextEditingController(text: '');
   TextEditingController descriptionController = TextEditingController(text: '');
+  TextEditingController partcipantInternalController =
+      TextEditingController(text: '');
+  TextEditingController partcipantExternalController =
+      TextEditingController(text: '');
   TextEditingController phoneController = TextEditingController(text: '');
   TextEditingController nipController = TextEditingController(text: '');
   TextEditingController partcipantController = TextEditingController(text: '');
@@ -63,7 +66,9 @@ class _FormPesanRuanganPagePageState extends State<FormPesanRuanganPage> {
       ];
 
       if (!allowedFileTypes.contains(fileType.toLowerCase())) {
-        print('Error: Jenis Berkas Tidak Diizinkan');
+        if (kDebugMode) {
+          print('Error: Jenis Berkas Tidak Diizinkan');
+        }
         return;
       }
 
@@ -93,11 +98,19 @@ class _FormPesanRuanganPagePageState extends State<FormPesanRuanganPage> {
       final formattedEndDate = enddate != null
           ? DateFormat("yyyy-MM-dd HH:mm:ss").format(enddate)
           : null;
+      String selectedParticipant;
+
+      if (_radioValue == 'GABUNGAN') {
+        selectedParticipant =
+            '${partcipantInternalController.text} ${partcipantExternalController.text}';
+      } else {
+        selectedParticipant = partcipantController.text;
+      }
 
       if (await bookingRoomProvider.bookingRoom(
         token: authProvider.user.token,
         name: nameController.text,
-        participant: partcipantController.text,
+        participant: selectedParticipant,
         roomid: widget.idRoom,
         description: descriptionController.text,
         nip: nipController.text,
@@ -349,7 +362,7 @@ class _FormPesanRuanganPagePageState extends State<FormPesanRuanganPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Waktu Awal Pemesanan',
+            'Waktu Akhir Pemesanan',
             style: blackTextStyle.copyWith(
               fontWeight: medium,
             ),
@@ -385,28 +398,92 @@ class _FormPesanRuanganPagePageState extends State<FormPesanRuanganPage> {
     }
 
     Widget participant() {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Participant',
-            style: blackTextStyle.copyWith(
-              fontWeight: medium,
-            ),
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          TextFormField(
-            controller: partcipantController,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
+      return Visibility(
+        visible: _radioValue != 'INTERNAL & EXTERNAL',
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Participant',
+              style: blackTextStyle.copyWith(
+                fontWeight: medium,
               ),
-              contentPadding: const EdgeInsets.all(12),
             ),
-          ),
-        ],
+            const SizedBox(
+              height: 8,
+            ),
+            TextFormField(
+              controller: partcipantController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                contentPadding: const EdgeInsets.all(12),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget participantInternalExternal() {
+      return Visibility(
+        visible: _radioValue == 'GABUNGAN',
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Participant Internal',
+                    style: blackTextStyle.copyWith(
+                      fontWeight: medium,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  TextFormField(
+                    controller: partcipantInternalController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      contentPadding: const EdgeInsets.all(12),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Participant External',
+                    style: blackTextStyle.copyWith(
+                      fontWeight: medium,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  TextFormField(
+                    controller: partcipantExternalController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      contentPadding: const EdgeInsets.all(12),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       );
     }
 
@@ -456,13 +533,34 @@ class _FormPesanRuanganPagePageState extends State<FormPesanRuanganPage> {
                 groupValue: _radioValue,
                 onChanged: _handleRadioValueChange,
               ),
-              const Text('INTERNAL'),
+              Text(
+                'INTERNAL',
+                style: blackTextStyle.copyWith(
+                  fontSize: 14,
+                ),
+              ),
               Radio(
                 value: 'EXTERNAL',
                 groupValue: _radioValue,
                 onChanged: _handleRadioValueChange,
               ),
-              const Text('EXTERNAL'),
+              Text(
+                'EXTERNAL',
+                style: blackTextStyle.copyWith(
+                  fontSize: 14,
+                ),
+              ),
+              Radio(
+                value: 'INTERNAL & EXTERNAL',
+                groupValue: _radioValue,
+                onChanged: _handleRadioValueChange,
+              ),
+              Text(
+                'INTERNAL &\n EXTERNAL',
+                style: blackTextStyle.copyWith(
+                  fontSize: 12,
+                ),
+              ),
             ],
           ),
         ],
@@ -535,6 +633,7 @@ class _FormPesanRuanganPagePageState extends State<FormPesanRuanganPage> {
               phone(),
               radioButtons(),
               participant(),
+              participantInternalExternal(),
               activity(),
               startDate(),
               endDate(),

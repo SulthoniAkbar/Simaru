@@ -65,8 +65,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => SplashScreen(),
-          '/sign-in': (context) => SignInPage(),
+          '/': (context) => const SplashScreen(),
+          '/sign-in': (context) =>const SignInPage(),
           '/sign-up': (context) => const SignUpPage(),
           '/home': (context) => MainPage(),
           '/faq': (context) => FaqPage(),

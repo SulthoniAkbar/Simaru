@@ -53,12 +53,12 @@ class _RiwayatPageState extends State<RiwayatPage> {
           builder: (context, riwayatProvider, _) {
             if (riwayatProvider.isLoading) {
               // Jika sedang loading, tampilkan indikator loading
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (riwayatProvider.error != null) {
               // Jika terjadi error saat mengambil data, tampilkan pesan error
-              return Center(
+              return const Center(
                 child: Text('Terjadi kesalahan saat memuat data'),
               );
             } else if (riwayatProvider.notif.isEmpty) {
@@ -69,14 +69,14 @@ class _RiwayatPageState extends State<RiwayatPage> {
             } else {
               // Jika data notif tersedia, tampilkan daftar notif
               return SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
+                physics: const AlwaysScrollableScrollPhysics(),
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                     minHeight: MediaQuery.of(context).size.height -
                         Scaffold.of(context).appBarMaxHeight,
                   ),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
                     child: ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,

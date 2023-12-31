@@ -41,8 +41,9 @@ class RiwayatCard extends StatelessWidget {
       );
     }
 
-    bool showReviewButton = riwayat.status == "DONE";
-
+    bool showReviewButton = riwayat.status == "DONE" &&
+        DateTime.parse(riwayat.bookingDate).isBefore(DateTime.now());
+ 
     return Card(
       color: Colors.white,
       shape: RoundedRectangleBorder(
@@ -105,7 +106,7 @@ class RiwayatCard extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  FeedbackPage(idRoom: this.riwayat.idRoom),
+                                  FeedbackPage(idRoom: riwayat.idRoom),
                             ),
                           );
                         },
@@ -132,23 +133,23 @@ class RiwayatCard extends StatelessWidget {
     );
   }
 
-  void _showImageDialog(BuildContext context, String imageUrl) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          child: SizedBox(
-            width: 500, // Sesuaikan ukuran container sesuai kebutuhan
-            height: 500, // Sesuaikan ukuran container sesuai kebutuhan
-            child: Image.network(
-              imageUrl,
-              // fit: BoxFit.cover, // Sesuaikan dengan tampilan yang Anda inginkan
-            ),
-          ),
-        );
-      },
-    );
-  }
+  // void _showImageDialog(BuildContext context, String imageUrl) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return Dialog(
+  //         child: SizedBox(
+  //           width: 500, // Sesuaikan ukuran container sesuai kebutuhan
+  //           height: 500, // Sesuaikan ukuran container sesuai kebutuhan
+  //           child: Image.network(
+  //             imageUrl,
+  //             // fit: BoxFit.cover, // Sesuaikan dengan tampilan yang Anda inginkan
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 }
 
 Widget emptyRuangan() {
