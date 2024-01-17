@@ -16,7 +16,8 @@ class BookingService {
     String phone,
     int devision,
     int roomid,
-    String participant,
+    String participantInternal,
+     String participantExternal,
     String participanttype,
     String attachment,
     String description,
@@ -37,7 +38,8 @@ class BookingService {
       ..fields['nip'] = nip
       ..fields['phone'] = phone
       ..fields['description'] = description
-      ..fields['participant'] = participant
+      ..fields['participant_internal'] = participantInternal
+      ..fields['participant_external'] = participantExternal
       ..fields['participant_type'] = participanttype;
 
     // Tambahkan kondisi untuk menghindari attachment null

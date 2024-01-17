@@ -10,7 +10,8 @@ class BookingRoomModel {
   String nip;
   String phone;
   String description;
-  String participant;
+  String participantInternal;
+  String participantExternal;
   int devisi;
   String participanttype;
   String attachment;
@@ -28,7 +29,8 @@ class BookingRoomModel {
     this.phone,
     this.participanttype,
     this.description,
-    this.participant,
+    this.participantInternal,
+    this.participantExternal,
     this.devisi,
     this.attachment,
   });
@@ -45,7 +47,8 @@ class BookingRoomModel {
     status = json['status'];
     participanttype = json['participant_type'];
     description = json['description'];
-    participant = json['participant'];
+    participantInternal = json['participant_internal'];
+    participantExternal = json['participant_external'];
     devisi = json['division_id'];
     attachment = json['attachment'];
   }
@@ -57,7 +60,8 @@ class BookingRoomModel {
       'phone': phone,
       'booking_start_date': bookingStartDate,
       'booking_end_date': bookingEndDate,
-      'participant': participant,
+      'participant_internal': participantInternal,
+      'participant_external': participantExternal,
       'status': status,
       'description': description,
       'member_id': idMember,

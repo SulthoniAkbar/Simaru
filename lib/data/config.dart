@@ -1,1 +1,1 @@
-String baseUrl = 'https://diskominfo-simaru.snhgroup.space/api';
+String baseUrl = 'https://bookingapps-simaru.snhgroup.space/api';

@@ -38,7 +38,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
     return AppBar(
       backgroundColor: bgColor1,
       centerTitle: true,
-      title: Text('Riwayat Pemesanan'),
+      title: const Text('Riwayat Pemesanan'),
       automaticallyImplyLeading: true,
       elevation: 0,
     );

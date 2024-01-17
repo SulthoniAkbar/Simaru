@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:simaru/models/user_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/riwayat ruangan/riwayat_model.dart';
 import '../pages/keluhan ruang/feedback_page.dart';
 import '../themes.dart';
@@ -42,8 +44,8 @@ class RiwayatCard extends StatelessWidget {
     }
 
     bool showReviewButton = riwayat.status == "DONE" &&
-        DateTime.parse(riwayat.bookingDate).isBefore(DateTime.now());
- 
+        DateTime.now().isAfter(DateTime.parse(riwayat.bookingEndDate));
+
     return Card(
       color: Colors.white,
       shape: RoundedRectangleBorder(
@@ -52,104 +54,126 @@ class RiwayatCard extends StatelessWidget {
       elevation: 4,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Row(
+        child: Column(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.network(
-                riwayat.room.image,
-                height: 70,
-                width: 70,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Pemesanan Ruang Rapat',
-                    style: secondaryTextStyle.copyWith(fontSize: 12),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(
+                    riwayat.room.image,
+                    height: 70,
+                    width: 70,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
                   ),
-                  const SizedBox(height: 6),
-                  Text(
-                    riwayat.room.name,
-                    style: primaryTextStyle3.copyWith(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                    ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Pemesanan Ruang Rapat',
+                        style: secondaryTextStyle.copyWith(fontSize: 12),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        riwayat.room.name,
+                        style: primaryTextStyle3.copyWith(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        riwayat.status,
+                        style: statusTextStyle,
+                      ),
+                      Text(
+                        riwayat.bookingDate.toString(),
+                        style: subtitleTextStyle.copyWith(fontSize: 10),
+                      ),
+                    ],
                   ),
-                  Text(
-                    riwayat.status,
-                    style: statusTextStyle,
-                  ),
-                  Text(
-                    riwayat.bookingDate.toString(),
-                    style: subtitleTextStyle.copyWith(fontSize: 10),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.all(2),
-                child: showReviewButton
-                    ? TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  FeedbackPage(idRoom: riwayat.idRoom),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.all(2),
+                        child: showReviewButton
+                            ? TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          FeedbackPage(idRoom: riwayat.idRoom),
+                                    ),
+                                  );
+                                },
+                                style: TextButton.styleFrom(
+                                  backgroundColor: greenColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                ),
+                                child: Text(
+                                  'Beri Ulasan',
+                                  style: whiteTextStyle.copyWith(
+                                    fontSize: 10,
+                                    fontWeight: semibold,
+                                  ),
+                                ),
+                              )
+                            : Container(),
+                      ),
+                      // Tombol Batal Pemesanan
+                      if (showReviewButton = riwayat.status == "DONE" &&
+                          !showReviewButton &&
+                          DateTime.now().isBefore(
+                            DateTime.parse(riwayat.bookingEndDate),
+                          ))
+                        Container(
+                          margin: const EdgeInsets.all(2),
+                          child: TextButton(
+                            onPressed: () {
+                              String message =
+                                  "Saya ${riwayat.name} Akan membatalkan pemesanan ${riwayat.room.name} pada tanggal ${riwayat.bookingDate} jam ${riwayat.bookingStartDate} - ${riwayat.bookingEndDate}.";
+                              String whatsApp =
+                                  "https://wa.me/6289505151473?text=${Uri.encodeComponent(message)}";
+                              launch(whatsApp);
+                            },
+                            style: TextButton.styleFrom(
+                              backgroundColor:
+                                  Colors.red, // Sesuaikan warna batal pemesanan
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
-                          );
-                        },
-                        style: TextButton.styleFrom(
-                          backgroundColor: greenColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            child: Text(
+                              'Batal Pemesanan',
+                              style: whiteTextStyle.copyWith(
+                                fontSize: 10,
+                                fontWeight: semibold,
+                              ),
+                            ),
                           ),
                         ),
-                        child: Text(
-                          'Beri Ulasan',
-                          style: whiteTextStyle.copyWith(
-                            fontSize: 10,
-                            fontWeight: semibold,
-                          ),
-                        ),
-                      )
-                    : Container(),
-              ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
         ),
       ),
     );
   }
-
-  // void _showImageDialog(BuildContext context, String imageUrl) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return Dialog(
-  //         child: SizedBox(
-  //           width: 500, // Sesuaikan ukuran container sesuai kebutuhan
-  //           height: 500, // Sesuaikan ukuran container sesuai kebutuhan
-  //           child: Image.network(
-  //             imageUrl,
-  //             // fit: BoxFit.cover, // Sesuaikan dengan tampilan yang Anda inginkan
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
 }
 
 Widget emptyRuangan() {
