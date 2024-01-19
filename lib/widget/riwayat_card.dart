@@ -133,17 +133,19 @@ class RiwayatCard extends StatelessWidget {
                             : Container(),
                       ),
                       // Tombol Batal Pemesanan
-                      if (showReviewButton = riwayat.status == "DONE" &&
-                          !showReviewButton &&
-                          DateTime.now().isBefore(
-                            DateTime.parse(riwayat.bookingEndDate),
-                          ))
+                      if (showReviewButton = riwayat.status == "PENDING" ||
+                          riwayat.status == "DONE" &&
+                              !showReviewButton &&
+                              DateTime.now().isBefore(
+                                DateTime.parse(riwayat.bookingEndDate),
+                              ))
                         Container(
                           margin: const EdgeInsets.all(2),
                           child: TextButton(
                             onPressed: () {
                               String message =
-                                  "Saya ${riwayat.name} Akan membatalkan pemesanan ${riwayat.room.name} pada tanggal ${riwayat.bookingDate} jam ${riwayat.bookingStartDate} - ${riwayat.bookingEndDate}.";
+                                  // "Saya ${riwayat.name} Akan membatalkan pemesanan ${riwayat.room.name} pada tanggal ${riwayat.bookingDate} jam ${riwayat.bookingStartDate} - ${riwayat.bookingEndDate}.";
+                                  "Hai Admin Dinas Komunikasi dan Infromatika Provinsi Jawa Timur. Mohon Maaf Saya Berencana akan membatalkan Pemesanan Ruang Rapat, dengan deskripsi senagai berikut: \n\n Nama Pemesanan:\n ${riwayat.name}\n Ruangan:\n ${riwayat.room.name}\n Tanggal Pemesanan:\n ${riwayat.bookingDate}\n Jam Pelaksanaan Rapat:\n ${riwayat.bookingStartDate} sampai dengan ${riwayat.bookingEndDate}\n Deskripsi Pembatalan:\n..........  \n\n\n\n Noted: Untuk Pembatalan Ruangan Tolong isikan Deskripsi Penyebab Pembatalan Rapat Diatas ini(Hapus ...... dengan deskripsi pembatalan).";
                               String whatsApp =
                                   "https://wa.me/6289505151473?text=${Uri.encodeComponent(message)}";
                               launch(whatsApp);

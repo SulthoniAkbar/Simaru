@@ -1,21 +1,17 @@
 import 'package:lottie/lottie.dart';
-import 'package:simaru/provider/auth_provider.dart';
-import 'package:simaru/provider/riwayat_provider.dart';
-import 'package:simaru/themes.dart';
-import 'package:simaru/widget/booking_room_card.dart';
-import 'package:simaru/widget/notifikasi_card.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
+import 'package:simaru/themes.dart';
 import 'package:flutter/material.dart';
 
 class FaqPage extends StatefulWidget {
+  const FaqPage({Key key}) : super(key: key);
+
   @override
   State<FaqPage> createState() => _FaqPageState();
 }
 
 class _FaqPageState extends State<FaqPage> {
-  Map<int, bool> _isExpandedMap = {};
+  final Map<int, bool> _isExpandedMap = {};
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +23,7 @@ class _FaqPageState extends State<FaqPage> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Lottie.asset(
@@ -35,7 +31,7 @@ class _FaqPageState extends State<FaqPage> {
                   width: double.infinity,
                   height: 300,
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
                   'FAQ',
                   style: blueTextStyle.copyWith(
@@ -45,7 +41,7 @@ class _FaqPageState extends State<FaqPage> {
                 ),
               ],
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Expanded(
               child: ListView.builder(
                 itemCount: 3,
@@ -55,7 +51,6 @@ class _FaqPageState extends State<FaqPage> {
                       borderRadius: BorderRadius.circular(50),
                     ),
                     child: ExpansionPanelList(
-                      // Gunakan status ekspansi dari Map sesuai indeks panel
                       expansionCallback: (panelIndex, isExpanded) {
                         setState(() {
                           _isExpandedMap[index] = !isExpanded;
@@ -67,7 +62,7 @@ class _FaqPageState extends State<FaqPage> {
                             return ListTile(
                               title: Text(
                                 _getQuestion(index),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -78,7 +73,7 @@ class _FaqPageState extends State<FaqPage> {
                             padding: const EdgeInsets.all(16.0),
                             child: Text(
                               _getAnswer(index),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 14,
                               ),
                             ),
@@ -102,11 +97,11 @@ class _FaqPageState extends State<FaqPage> {
   String _getQuestion(int index) {
     switch (index) {
       case 0:
-        return 'Siapa pengguna ruang?';
+        return 'Apa itu Simaru?';
       case 1:
-        return 'Untuk siapa digunakan?';
+        return 'Bagaimana cara melakukan Pemesanan Ruang?';
       case 2:
-        return 'Buat apa?';
+        return 'Bagaimana cara cancel Penesanan Ruang';
       default:
         return 'Pertanyaan ini belum memiliki jawaban.';
     }
@@ -115,11 +110,11 @@ class _FaqPageState extends State<FaqPage> {
   String _getAnswer(int index) {
     switch (index) {
       case 0:
-        return 'Jawaban untuk pertanyaan 1. Karyawan';
+        return 'Simaru adalah aplikasi Manajemen Pemesanan Ruang Rapat Dinas Komunikasi dan Informatika Provinsi Jawa Timur yang dapat digunakan untuk melakukan pemesanan ruang rapat pada kantor Dinas Komunikasi dan Informatika Provinsi Jawa Timur. ';
       case 1:
-        return 'Jawaban untuk pertanyaan 2. Karyawan dan pengguna lain';
+        return '- Masuk Ke Halaman Awal Aplikasi\n-Pilih “Booking Ruangan”\n- Pilih Ruangan dan pilih "Pesan"\n- Isi semua form untuk pemesanan dan jika sudah selesai maka pilih tombol pesan';
       case 2:
-        return 'Jawaban untuk pertanyaan 3. Untuk memesan ruangan';
+        return '- Masuk Ke Halaman Awal Aplikasi\n-Pilih “Riwayat Ruangan”\n- Pilih Ruangan yang akan di cancel dan batalkan pemesanan\n- Anda akan di arahkan di nomer WhatsApp Admin, isi deskripsi penyebab pembatalan ruangan dan kirim kepada admin';
       default:
         return 'Pertanyaan ini belum memiliki jawaban.';
     }

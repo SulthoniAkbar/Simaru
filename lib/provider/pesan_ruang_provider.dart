@@ -10,7 +10,7 @@ class PesanRuangProvider with ChangeNotifier {
   String _error;
   String get error => _error;
 
-  bool _isLoading = false;
+  final bool _isLoading = false;
   bool get isLoading => _isLoading;
 
   set ruangan(List<RuanganModel> ruangan) {

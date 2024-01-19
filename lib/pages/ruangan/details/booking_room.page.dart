@@ -1,4 +1,3 @@
-import 'package:simaru/models/booking_model.dart';
 import 'package:simaru/models/jadwal%20ruangan/search/search_model.dart';
 import 'package:simaru/provider/auth_provider.dart';
 import 'package:simaru/provider/search_scheduledetails_provider.dart';
@@ -242,7 +241,7 @@ class _BookingRoomPageState extends State<BookingRoomPage> {
                             fontWeight: medium,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Text(
@@ -262,17 +261,6 @@ class _BookingRoomPageState extends State<BookingRoomPage> {
                       fontWeight: semibold,
                     ),
                   ),
-                  // SizedBox(
-                  //   height: 5,
-                  // ),
-                  // Text(
-                  //   "Id Ruang",
-                  //   // "ID Ruang: ${rooms.facilities.roomid}",
-                  //   style: primaryTextStyle.copyWith(
-                  //     fontSize: 10,
-                  //     fontWeight: semibold,
-                  //   ),
-                  // ),
                 ],
               ),
             ),
@@ -294,8 +282,6 @@ class _BookingRoomPageState extends State<BookingRoomPage> {
                     primaryTextStyle.copyWith(fontSize: 18, fontWeight: bold),
               ),
             ),
-
-            //Description
             Container(
               height: 130,
               width: double.infinity,
