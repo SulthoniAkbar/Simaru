@@ -79,7 +79,7 @@ class JadwalRuangCard extends StatelessWidget {
                   height: 6,
                 ),
                 Text(
-                  jadwalruang.floor,
+                  jadwalruang.floor.toString(),
                   style: primaryTextStyle3.copyWith(
                     fontWeight: semibold,
                     fontSize: 14,
@@ -99,7 +99,7 @@ class JadwalRuangCard extends StatelessWidget {
                   height: 6,
                 ),
                 Text(
-                  jadwalruang.capacity,
+                  jadwalruang.capacity.toString(),
                   style: primaryTextStyle3.copyWith(
                     fontWeight: semibold,
                     fontSize: 14,

@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simaru/provider/auth_provider.dart';
-import 'package:simaru/provider/riwayat_provider.dart';
+import 'package:simaru/provider/pesan_ruang_provider.dart';
+import 'package:simaru/widget/riwayat_card.dart';
 import '../../themes.dart';
-import '../../widget/riwayat_card.dart';
+import '../../widget/unvailableroom_card.dart';
 
-class RiwayatPage extends StatefulWidget {
-  const RiwayatPage({Key key}) : super(key: key);
+class UnvailbleRoomPage extends StatefulWidget {
+  const UnvailbleRoomPage({Key key}) : super(key: key);
 
   @override
-  State<RiwayatPage> createState() => _RiwayatPageState();
+  State<UnvailbleRoomPage> createState() => _UnvailbleRoomPageState();
 }
 
-class _RiwayatPageState extends State<RiwayatPage> {
+class _UnvailbleRoomPageState extends State<UnvailbleRoomPage> {
   @override
   void initState() {
     getInit();
@@ -23,24 +24,36 @@ class _RiwayatPageState extends State<RiwayatPage> {
     AuthProvider authProvider =
         Provider.of<AuthProvider>(context, listen: false);
 
-    await Provider.of<RiwayatProvider>(context, listen: false)
-        .notifacation(authProvider.user.token);
+    await Provider.of<PesanRuangProvider>(context, listen: false)
+        .bookingroom(null, authProvider.user.token);
   }
 
   Future<void> _refreshData() async {
     AuthProvider authProvider =
         Provider.of<AuthProvider>(context, listen: false);
-    await Provider.of<RiwayatProvider>(context, listen: false)
-        .notifacation(authProvider.user.token);
+    await Provider.of<PesanRuangProvider>(context, listen: false)
+        .bookingroom(null, authProvider.user.token);
   }
 
   Widget header() {
     return AppBar(
       backgroundColor: bgColor1,
-      centerTitle: true,
-      title: const Text('Riwayat Pemesanan'),
-      automaticallyImplyLeading: true,
       elevation: 0,
+      automaticallyImplyLeading: true, // Nonaktifkan tombol kembali otomatis
+      title: Text(
+        'Ruang Rapat',
+        style: TextStyle(color: Colors.white),
+      ),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.search), // Tambahkan ikon search di sini
+          onPressed: () {
+            // Tambahkan fungsi untuk melakukan navigasi saat ikon search ditekan
+            Navigator.pushNamed(context, "/jadwalruang");
+          },
+        ),
+      ],
+      centerTitle: true, // Teks judul akan ditempatkan di tengah
     );
   }
 
@@ -49,19 +62,19 @@ class _RiwayatPageState extends State<RiwayatPage> {
       color: whiteColor,
       child: RefreshIndicator(
         onRefresh: _refreshData,
-        child: Consumer<RiwayatProvider>(
-          builder: (context, riwayatProvider, _) {
-            if (riwayatProvider.isLoading) {
+        child: Consumer<PesanRuangProvider>(
+          builder: (context, pesanruangProvider, _) {
+            if (pesanruangProvider.isLoading) {
               // Jika sedang loading, tampilkan indikator loading
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (riwayatProvider.error != null) {
+            } else if (pesanruangProvider.error != null) {
               // Jika terjadi error saat mengambil data, tampilkan pesan error
               return const Center(
                 child: Text('Terjadi kesalahan saat memuat data'),
               );
-            } else if (riwayatProvider.notif.isEmpty) {
+            } else if (pesanruangProvider.ruangan.isEmpty) {
               // Jika data notif kosong, tampilkan widget emptyRuangan()
               return Center(
                 child: emptyRuangan(),
@@ -81,11 +94,12 @@ class _RiwayatPageState extends State<RiwayatPage> {
                     child: ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: riwayatProvider.notif.length,
+                      itemCount: pesanruangProvider.ruangan.length,
                       itemBuilder: (context, index) {
                         return Container(
                           margin: const EdgeInsets.only(bottom: 10),
-                          child: RiwayatCard(riwayatProvider.notif[index]),
+                          child: UnvailableRoomCard(
+                              pesanruangProvider.ruangan[index]),
                         );
                       },
                     ),

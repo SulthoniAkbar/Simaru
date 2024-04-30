@@ -2,8 +2,8 @@ import 'package:simaru/models/facilty_model.dart';
 
 class SearchFacilitiesModel {
   int id;
-  String quantity;
-  String roomid;
+  int quantity;
+  int roomid;
   FacilityModel facility;
 
   SearchFacilitiesModel({

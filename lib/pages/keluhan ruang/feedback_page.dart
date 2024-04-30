@@ -178,7 +178,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
     return AppBar(
       backgroundColor: bgColor1,
       centerTitle: true,
-      title: Text('Reporting'),
+      title: Text('Keluhan Ruang'),
       elevation: 0,
     );
   }

@@ -2,6 +2,8 @@ import 'package:simaru/pages/home/bottomsheet/faq.dart';
 import 'package:simaru/pages/home/main_page.dart';
 import 'package:simaru/pages/jadwal%20ruang/jadwal_ruang.dart';
 import 'package:simaru/pages/jadwal%20ruang/list_jadwal_ruang.dart';
+import 'package:simaru/pages/jadwal%20ruang/list_unvailable_room.dart';
+import 'package:simaru/pages/jadwal%20ruang/unvailable_room.dart';
 import 'package:simaru/pages/pesan%20ruang%20baru/pesan_ruang_room.dart';
 import 'package:simaru/pages/riwayat%20pemesanan/riwayat_page.dart';
 import 'package:simaru/pages/ruangan/booking_page.dart';
@@ -20,7 +22,7 @@ import 'package:simaru/provider/search_room_provider.dart';
 import 'package:simaru/provider/search_scheduledetails_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:simaru/provider/search_unvailable_provider.dart';
 import 'pages/keluhan ruang/feedback_page.dart';
 
 void main() => runApp(const MyApp());
@@ -56,6 +58,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => PesanRuangProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => SearchUnvailableProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -67,12 +72,14 @@ class MyApp extends StatelessWidget {
           '/faq': (context) => const FaqPage(),
           '/riwayat': (context) => const RiwayatPage(),
           '/feedback': (context) => const FeedbackPage(),
-          '/booking': (context) => BookingPage(),
-          '/jadwalruang': (context) => JadwalRuangPage(),
-          '/listjadwalruang': (context) => ListJadwalRuang(),
+          '/booking': (context) => const BookingPage(),
+          '/jadwalruang': (context) => const JadwalRuangPage(),
+          '/listjadwalruang': (context) => const ListJadwalRuang(),
           '/pesanruang': (context) => const PesanRuangPage(),
           '/bookingroom': (context) => const BookingRoomPage(),
           '/schedule': (context) => SchedulePage(),
+          '/unvailableroom': (context) => const UnvailbleRoomPage(),
+          '/listunvailableroom': (context) => const ListUnvailableRoomPage(),
         },
       ),
     );

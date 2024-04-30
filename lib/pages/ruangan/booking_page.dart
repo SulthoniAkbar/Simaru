@@ -7,6 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class BookingPage extends StatefulWidget {
+  const BookingPage({Key key}) : super(key: key);
+
   @override
   State<BookingPage> createState() => _BookingPageState();
 }
@@ -38,7 +40,7 @@ class _BookingPageState extends State<BookingPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 backgroundColor: alertColor,
-                content: Text(
+                content: const Text(
                   'Tanggal mulai harus setelah atau sama dengan tanggal sekarang',
                   textAlign: TextAlign.center,
                 ),
@@ -51,7 +53,7 @@ class _BookingPageState extends State<BookingPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 backgroundColor: alertColor,
-                content: Text(
+                content: const Text(
                   'Tanggal selesai harus setelah tanggal mulai',
                   textAlign: TextAlign.center,
                 ),
@@ -76,7 +78,7 @@ class _BookingPageState extends State<BookingPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               backgroundColor: alertColor,
-              content: Text(
+              content: const Text(
                 'Format tanggal tidak valid',
                 textAlign: TextAlign.center,
               ),
@@ -87,7 +89,7 @@ class _BookingPageState extends State<BookingPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: alertColor,
-            content: Text(
+            content: const Text(
               'Tanggal mulai dan selesai tidak boleh kosong',
               textAlign: TextAlign.center,
             ),
@@ -100,7 +102,7 @@ class _BookingPageState extends State<BookingPage> {
       return AppBar(
         backgroundColor: bgColor1,
         centerTitle: true,
-        title: Text('Booking'),
+        title: const Text('Booking'),
         elevation: 0,
       );
     }

@@ -3,8 +3,8 @@ import 'booking_fasilitias_model.dart';
 class RuanganModel {
   int id;
   String name;
-  String floor;
-  String capacity;
+  int floor;
+  int capacity;
   String image;
   List<RoomFacilitiesModel> roomFacilities;
 

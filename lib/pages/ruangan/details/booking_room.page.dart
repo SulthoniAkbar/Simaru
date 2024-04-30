@@ -78,7 +78,7 @@ class _BookingRoomPageState extends State<BookingRoomPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   Text(
@@ -96,7 +96,7 @@ class _BookingRoomPageState extends State<BookingRoomPage> {
                     style: secondaryTextStyle,
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
@@ -194,7 +194,7 @@ class _BookingRoomPageState extends State<BookingRoomPage> {
               },
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Row(
@@ -245,7 +245,7 @@ class _BookingRoomPageState extends State<BookingRoomPage> {
                           height: 5,
                         ),
                         Text(
-                          rooms?.floor ?? '',
+                          rooms?.floor?.toString() ?? '',
                           style: subtitleTextStyle.copyWith(
                             fontSize: 12,
                             fontWeight: semibold,
@@ -255,7 +255,7 @@ class _BookingRoomPageState extends State<BookingRoomPage> {
                     ),
                   ),
                   Text(
-                    "Kapasitas\n${rooms?.capacity ?? ''}",
+                    "Kapasitas\n${rooms?.capacity?.toString() ?? ''}",
                     style: primaryTextStyle.copyWith(
                       fontSize: 10,
                       fontWeight: semibold,
@@ -270,7 +270,7 @@ class _BookingRoomPageState extends State<BookingRoomPage> {
                 left: defaultMargin,
                 right: defaultMargin,
               ),
-              padding: EdgeInsets.all(7),
+              padding: const EdgeInsets.all(7),
               decoration: BoxDecoration(
                 color: subtitleTextColor,
                 borderRadius: BorderRadius.circular(7),
@@ -291,7 +291,7 @@ class _BookingRoomPageState extends State<BookingRoomPage> {
                 right: defaultMargin,
                 bottom: defaultMargin,
               ),
-              padding: EdgeInsets.all(7),
+              padding: const EdgeInsets.all(7),
               decoration: BoxDecoration(
                 color: subtitleTextColor,
                 borderRadius: BorderRadius.circular(7),
@@ -319,7 +319,7 @@ class _BookingRoomPageState extends State<BookingRoomPage> {
       return Container(
         height: 50,
         width: double.infinity,
-        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: TextButton(
           onPressed: () {
             showSuccessDialog();

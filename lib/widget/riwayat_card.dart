@@ -112,7 +112,7 @@ class RiwayatCard extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          FeedbackPage(idRoom: riwayat.idRoom),
+                                          FeedbackPage(idRoom: riwayat.idRoom.toString()),
                                     ),
                                   );
                                 },

@@ -7,6 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class JadwalRuangPage extends StatefulWidget {
+  const JadwalRuangPage({Key key}) : super(key: key);
+
   @override
   State<JadwalRuangPage> createState() => _JadwalRuangPageState();
 }
@@ -23,8 +25,6 @@ class _JadwalRuangPageState extends State<JadwalRuangPage> {
         Provider.of<AuthProvider>(context, listen: false);
     SearchProvider searchProvider = Provider.of<SearchProvider>(context);
 
-    getInit() async {}
-
     handleSend() async {
       if (startDateController.text.isNotEmpty &&
           endDateController.text.isNotEmpty) {
@@ -38,7 +38,7 @@ class _JadwalRuangPageState extends State<JadwalRuangPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 backgroundColor: alertColor,
-                content: Text(
+                content: const Text(
                   'Tanggal mulai harus setelah atau sama dengan tanggal sekarang',
                   textAlign: TextAlign.center,
                 ),
@@ -51,7 +51,7 @@ class _JadwalRuangPageState extends State<JadwalRuangPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 backgroundColor: alertColor,
-                content: Text(
+                content: const Text(
                   'Tanggal selesai harus setelah tanggal mulai',
                   textAlign: TextAlign.center,
                 ),
@@ -70,7 +70,7 @@ class _JadwalRuangPageState extends State<JadwalRuangPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               backgroundColor: alertColor,
-              content: Text(
+              content: const Text(
                 'Format tanggal tidak valid',
                 textAlign: TextAlign.center,
               ),
@@ -81,7 +81,7 @@ class _JadwalRuangPageState extends State<JadwalRuangPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: alertColor,
-            content: Text(
+            content: const Text(
               'Tanggal mulai dan selesai tidak boleh kosong',
               textAlign: TextAlign.center,
             ),
@@ -94,7 +94,7 @@ class _JadwalRuangPageState extends State<JadwalRuangPage> {
       return AppBar(
         backgroundColor: bgColor1,
         centerTitle: true,
-        title: Text('Jadwal Ruang'),
+        title: const Text('Jadwal Ruang'),
         elevation: 0,
       );
     }
@@ -103,7 +103,7 @@ class _JadwalRuangPageState extends State<JadwalRuangPage> {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Container(
-          margin: EdgeInsets.only(
+          margin: const EdgeInsets.only(
             top: 30,
           ),
           child: Column(
@@ -116,7 +116,7 @@ class _JadwalRuangPageState extends State<JadwalRuangPage> {
                   fontWeight: medium,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               Container(
@@ -130,10 +130,11 @@ class _JadwalRuangPageState extends State<JadwalRuangPage> {
                   controller: startDateController,
                   onTap: () {
                     DatePicker.showDateTimePicker(context,
-                        theme: DatePickerTheme(
+                        theme: const DatePickerTheme(
                           containerHeight: 210.0,
                         ),
                         showTitleActions: true, onConfirm: (date) {
+                      // ignore: avoid_print
                       print(date);
                       String formattedDate =
                           DateFormat("yyyy-MM-dd HH:mm:ss").format(date);
@@ -156,7 +157,7 @@ class _JadwalRuangPageState extends State<JadwalRuangPage> {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Container(
-          margin: EdgeInsets.only(
+          margin: const EdgeInsets.only(
             top: 30,
           ),
           child: Column(
@@ -169,7 +170,7 @@ class _JadwalRuangPageState extends State<JadwalRuangPage> {
                   fontWeight: medium,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               Container(
@@ -183,10 +184,11 @@ class _JadwalRuangPageState extends State<JadwalRuangPage> {
                   controller: endDateController,
                   onTap: () {
                     DatePicker.showDateTimePicker(context,
-                        theme: DatePickerTheme(
+                        theme: const DatePickerTheme(
                           containerHeight: 210.0,
                         ),
                         showTitleActions: true, onConfirm: (date) {
+                      // ignore: avoid_print
                       print(date);
                       String formattedDate =
                           DateFormat("yyyy-MM-dd HH:mm:ss").format(date);
@@ -211,7 +213,7 @@ class _JadwalRuangPageState extends State<JadwalRuangPage> {
         child: Container(
           height: 50,
           width: double.infinity,
-          margin: EdgeInsets.symmetric(vertical: 20),
+          margin: const EdgeInsets.symmetric(vertical: 20),
           child: TextButton(
             onPressed: handleSend,
             style: TextButton.styleFrom(
@@ -234,14 +236,12 @@ class _JadwalRuangPageState extends State<JadwalRuangPage> {
         appBar: header(),
         resizeToAvoidBottomInset: false,
         body: SafeArea(
-          child: Container(
-            child: Column(
-              children: [
-                startBookingInput(),
-                endBookingInput(),
-                sendButton(),
-              ],
-            ),
+          child: Column(
+            children: [
+              startBookingInput(),
+              endBookingInput(),
+              sendButton(),
+            ],
           ),
         ));
   }

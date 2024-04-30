@@ -1,1 +1,1 @@
-String baseUrl = 'https://bookingapps-simaru.snhgroup.space/api';
+String baseUrl = 'https://1441-125-166-0-242.ngrok-free.app/api';

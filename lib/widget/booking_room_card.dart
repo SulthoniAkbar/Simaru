@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simaru/models/pemesanan%20ruangan/ruangan_model.dart';
 import 'package:simaru/pages/pesan%20ruang%20baru/form_pesan_ruang.dart';
-import 'package:simaru/pages/pesan%20ruang%20baru/pesan_ruang_room.dart';
 import '../pages/pesan ruang baru/ruangan_page.dart';
 import '../themes.dart';
 
@@ -65,7 +64,7 @@ class BookingRoomCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        ruangan.floor,
+                        ruangan.floor.toString(),
                         style: blackTextStyle.copyWith(
                           fontSize: 14,
                           fontWeight: semibold,
@@ -81,7 +80,7 @@ class BookingRoomCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        ruangan.capacity,
+                        ruangan.capacity.toString(),
                         style: blackTextStyle.copyWith(
                           fontSize: 14,
                           fontWeight: semibold,

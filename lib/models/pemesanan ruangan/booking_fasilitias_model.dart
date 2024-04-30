@@ -4,7 +4,7 @@ class RoomFacilitiesModel {
   int roomId;
   int facilityId;
   int id;
-  String quantity;
+  int quantity;
   ObjectFacilityModel facility;
 
   RoomFacilitiesModel({
@@ -17,8 +17,8 @@ class RoomFacilitiesModel {
 
   factory RoomFacilitiesModel.fromJson(Map<String, dynamic> json) {
     return RoomFacilitiesModel(
-      roomId: int.parse(json['room_id']),
-      facilityId: int.parse(json['facility_id']),
+      roomId: json['room_id'],
+      facilityId: json['facility_id'],
       id: json['id'],
       quantity: json['quantity'],
       facility: ObjectFacilityModel.fromJson(json['facility']),

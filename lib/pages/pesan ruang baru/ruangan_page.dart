@@ -69,7 +69,8 @@ class _RoomPageState extends State<RoomPage> {
                     : const CircularProgressIndicator(), // Tampilkan indikator loading jika rooms masih null
                 const SizedBox(height: 20),
                 Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 5),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 5),
                   elevation: 4,
                   child: Padding(
                     padding: const EdgeInsets.all(20),
@@ -98,7 +99,7 @@ class _RoomPageState extends State<RoomPage> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          rooms != null ? rooms.floor : 'Loading...',
+                          rooms != null ? rooms.floor.toString() : 'Loading...',
                           style: const TextStyle(fontSize: 16),
                         ),
                         const SizedBox(height: 12),
@@ -111,7 +112,9 @@ class _RoomPageState extends State<RoomPage> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          rooms != null ? rooms.capacity : 'Loading...',
+                          rooms != null
+                              ? rooms.capacity.toString()
+                              : 'Loading...',
                           style: const TextStyle(fontSize: 16),
                         ),
                         const SizedBox(height: 12),

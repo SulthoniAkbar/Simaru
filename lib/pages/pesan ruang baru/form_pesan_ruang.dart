@@ -3,12 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-// import 'package:simaru/models/user_model.dart';
 import 'package:simaru/provider/auth_provider.dart';
 import 'package:simaru/provider/booking_room_provider.dart';
 import 'package:simaru/themes.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
+
+import '../../models/user_model.dart';
 
 class FormPesanRuanganPage extends StatefulWidget {
   final int idRoom;
@@ -20,26 +21,26 @@ class FormPesanRuanganPage extends StatefulWidget {
 }
 
 class _FormPesanRuanganPagePageState extends State<FormPesanRuanganPage> {
+  UserModel userModel;
   String selectedFilePath;
   DateTime startdate;
   DateTime enddate;
   TextEditingController startDateController = TextEditingController(text: '');
   TextEditingController endDateController = TextEditingController(text: '');
-  TextEditingController nameController = TextEditingController(text: '');
+  // TextEditingController nameController = TextEditingController(text: '');
   TextEditingController descriptionController = TextEditingController(text: '');
   TextEditingController partcipantInternalController =
       TextEditingController(text: '');
   TextEditingController partcipantExternalController =
       TextEditingController(text: '');
-  TextEditingController phoneController = TextEditingController(text: '');
-  TextEditingController nipController = TextEditingController(text: '');
+  // TextEditingController phoneController = TextEditingController(text: '');
+  // TextEditingController nipController = TextEditingController(text: '');
   // TextEditingController partcipantController = TextEditingController(text: '');
   String _radioValue = 'INTERNAL';
 
   void _handleRadioValueChange(String value) {
     setState(() {
       _radioValue = value;
-      // Reset values and visibility based on the selected radio value
       if (_radioValue == 'INTERNAL') {
         partcipantInternalController.text = '';
         partcipantExternalController.text = '0';
@@ -110,18 +111,17 @@ class _FormPesanRuanganPagePageState extends State<FormPesanRuanganPage> {
 
       if (await bookingRoomProvider.bookingRoom(
         token: authProvider.user.token,
-        name: nameController.text,
-        participantExternal: partcipantInternalController.text,
-        participantInternal: partcipantExternalController.text,
+        name: authProvider.user.name,
+        participantExternal: partcipantExternalController.text,
+        participantInternal: partcipantInternalController.text,
         roomid: widget.idRoom,
         description: descriptionController.text,
-        nip: nipController.text,
-        phone: phoneController.text,
+        nip: authProvider.user.member.nip,
+        phone: authProvider.user.phone,
         startDate: formattedStartDate,
         endDate: formattedEndDate,
         participanttype: _radioValue,
         attachment: selectedFilePath,
-        // devision: 1, // Ganti dengan ID devision yang sesuai
       )) {
         showDialog(
           context: context,
@@ -235,87 +235,6 @@ class _FormPesanRuanganPagePageState extends State<FormPesanRuanganPage> {
         title: const Text(
           'Pemesanan Ruang Rapat',
         ),
-      );
-    }
-
-    Widget nameInput() {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          Text(
-            'Name',
-            style: blackTextStyle.copyWith(
-              fontWeight: medium,
-            ),
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          TextFormField(
-            controller: nameController,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
-              ),
-              contentPadding: const EdgeInsets.all(12),
-            ),
-          ),
-        ],
-      );
-    }
-
-    Widget nip() {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'NIP',
-            style: blackTextStyle.copyWith(
-              fontWeight: medium,
-            ),
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          TextFormField(
-            controller: nipController,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
-              ),
-              contentPadding: const EdgeInsets.all(12),
-            ),
-          ),
-        ],
-      );
-    }
-
-    Widget phone() {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Phone',
-            style: blackTextStyle.copyWith(
-              fontWeight: medium,
-            ),
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          TextFormField(
-            controller: phoneController,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
-              ),
-              contentPadding: const EdgeInsets.all(12),
-            ),
-          ),
-        ],
       );
     }
 
@@ -661,9 +580,6 @@ class _FormPesanRuanganPagePageState extends State<FormPesanRuanganPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              nameInput(),
-              nip(),
-              phone(),
               radioButtons(),
               participantInternal(),
               participantExternal(),

@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:simaru/widget/jadwalruang_card.dart';
 
 class ListJadwalRuang extends StatefulWidget {
+  const ListJadwalRuang({Key key}) : super(key: key);
+
   @override
   State<ListJadwalRuang> createState() => _ListJadwalRuangState();
 }
@@ -30,7 +32,7 @@ class _ListJadwalRuangState extends State<ListJadwalRuang> {
       return AppBar(
         backgroundColor: bgColor1,
         centerTitle: true,
-        title: Text('Jadwal Ruang'),
+        title: const Text('Jadwal Ruang'),
         elevation: 0,
       );
     }

@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
 
     Widget profile() {
       return Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           top: 30,
         ),
         child: Column(
@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
         height: 55,
         child: TextButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/jadwalruang');
+            Navigator.pushNamed(context, '/unvailableroom');
           },
           style: TextButton.styleFrom(
             elevation: 20,
@@ -194,15 +194,15 @@ class _HomePageState extends State<HomePage> {
           children: [
             profile(),
             imageDashboard(),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             menuBooking(),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             menuJadwal(),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             menuRiwayat(),

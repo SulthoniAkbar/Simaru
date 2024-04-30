@@ -77,16 +77,19 @@ class _PesanRuangPageState extends State<PesanRuangPage> {
                         Scaffold.of(context).appBarMaxHeight,
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
                     child: ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: pesanruangProvider.ruangan.length,
                       itemBuilder: (context, index) {
+                        final reversedIndex =
+                            pesanruangProvider.ruangan.length - index - 1;
                         return Container(
                           margin: const EdgeInsets.only(bottom: 10),
                           child: BookingRoomCard(
-                              pesanruangProvider.ruangan[index]),
+                              pesanruangProvider.ruangan[reversedIndex]),
                         );
                       },
                     ),

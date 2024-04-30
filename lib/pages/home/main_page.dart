@@ -14,7 +14,7 @@ class _MainPageState extends State<MainPage> {
 
   final List<Widget> _pages = [
     HomePage(),
-    FaqPage(),
+    const FaqPage(),
     ProfilePage(),
   ];
 
