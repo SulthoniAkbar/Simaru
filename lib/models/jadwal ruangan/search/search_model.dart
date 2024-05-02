@@ -20,41 +20,6 @@ class SearchModel {
     this.booking,
     this.facilities,
   });
-
-  // SearchModel.fromJson(Map<String, dynamic> json) {
-  //   id = json['id'];
-  //   name = json['name'];
-  //   floor = json['floor'];
-  //   image = json['image'];
-  //   capacity = json['capacity'];
-  //   if (json['room_facilities'] != null) {
-  //     facilities = List<SearchFacilitiesModel>.from(json['room_facilities']
-  //         .map((roomfacility) => SearchFacilitiesModel.fromJson(roomfacility)));
-  //   }
-
-  //   if (json['bookings'] != null) {
-  //     bookings = List<BookingSearchModel>.from(
-  //         json['bookings'].map((booking) => BookingModel.fromJson(booking)));
-  //   }
-  // }
-
-  // Map<String, dynamic> toJson() {
-  //   final Map<String, dynamic> data = new Map<String, dynamic>();
-  //   data['id'] = id;
-  //   data['name'] = name;
-  //   data['floor'] = floor;
-  //   data['image'] = image;
-  //   data['capacity'] = capacity;
-  //   if (this.facilities != null) {
-  //     data['room_facilities'] =
-  //         this.facilities.map((facility) => facility.toJson()).toList();
-  //   }
-  //   if (this.bookings != null) {
-  //     data['bookings'] =
-  //         this.bookings.map((booking) => booking.toJson()).toList();
-  //   }
-  //   return data;
-  // }
   factory SearchModel.fromJson(Map<String, dynamic> json) {
     return SearchModel(
       id: json['id'],

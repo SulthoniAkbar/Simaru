@@ -22,20 +22,17 @@ class _UnvailableRoomCardState extends State<UnvailableRoomCard> {
     SearchUnvailableProvider searchunvailableProvider =
         Provider.of<SearchUnvailableProvider>(context);
     void handleSend() async {
-      // bool success = await searchunvailableProvider.searchunvailableroom(
-      //   token: authProvider.user.token,
-      //   search: widget.ruangan.name,
-      // );
-      // if (success) {
-      //   Navigator.pushNamed(context, '/listunvailableroom');
-      // } else {
-
-      // }
       if (await searchunvailableProvider.searchunvailableroom(
         token: authProvider.user.token,
         search: widget.ruangan.name,
       )) {
-        Navigator.pushNamed(context, '/listunvailableroom');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                ListUnvailableRoomPage(ruangan: widget.ruangan),
+          ),
+        );
       }
     }
 
@@ -99,7 +96,7 @@ class _UnvailableRoomCardState extends State<UnvailableRoomCard> {
                               ),
                               child: SizedBox(
                                 width: 190,
-                                height: 25, // Sesuaikan dengan kebutuhan Anda
+                                height: 25,
                                 child: Center(
                                   child: Text(
                                     'Selengkapnya',

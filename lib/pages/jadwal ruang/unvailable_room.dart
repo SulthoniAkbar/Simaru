@@ -39,21 +39,20 @@ class _UnvailbleRoomPageState extends State<UnvailbleRoomPage> {
     return AppBar(
       backgroundColor: bgColor1,
       elevation: 0,
-      automaticallyImplyLeading: true, // Nonaktifkan tombol kembali otomatis
-      title: Text(
+      automaticallyImplyLeading: true, 
+      title: const Text(
         'Ruang Rapat',
         style: TextStyle(color: Colors.white),
       ),
       actions: [
         IconButton(
-          icon: Icon(Icons.search), // Tambahkan ikon search di sini
+          icon: const Icon(Icons.search), 
           onPressed: () {
-            // Tambahkan fungsi untuk melakukan navigasi saat ikon search ditekan
             Navigator.pushNamed(context, "/jadwalruang");
           },
         ),
       ],
-      centerTitle: true, // Teks judul akan ditempatkan di tengah
+      centerTitle: true, 
     );
   }
 
@@ -65,22 +64,18 @@ class _UnvailbleRoomPageState extends State<UnvailbleRoomPage> {
         child: Consumer<PesanRuangProvider>(
           builder: (context, pesanruangProvider, _) {
             if (pesanruangProvider.isLoading) {
-              // Jika sedang loading, tampilkan indikator loading
               return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (pesanruangProvider.error != null) {
-              // Jika terjadi error saat mengambil data, tampilkan pesan error
               return const Center(
                 child: Text('Terjadi kesalahan saat memuat data'),
               );
             } else if (pesanruangProvider.ruangan.isEmpty) {
-              // Jika data notif kosong, tampilkan widget emptyRuangan()
               return Center(
                 child: emptyRuangan(),
               );
             } else {
-              // Jika data notif tersedia, tampilkan daftar notif
               return SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 child: ConstrainedBox(

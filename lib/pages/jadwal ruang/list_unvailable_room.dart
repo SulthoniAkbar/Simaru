@@ -6,9 +6,11 @@ import 'package:simaru/provider/search_unvailable_provider.dart';
 import 'package:simaru/themes.dart';
 import 'package:simaru/widget/listunvailableroom_card.dart';
 
-class ListUnvailableRoomPage extends StatefulWidget {
-  const ListUnvailableRoomPage({Key key}) : super(key: key);
+import '../../models/pemesanan ruangan/ruangan_model.dart';
 
+class ListUnvailableRoomPage extends StatefulWidget {
+  final RuanganModel ruangan;
+  const ListUnvailableRoomPage({Key key, this.ruangan}) : super(key: key);
   @override
   State<ListUnvailableRoomPage> createState() => _ListUnvailableRoomPageState();
 }
@@ -31,13 +33,12 @@ class _ListUnvailableRoomPageState extends State<ListUnvailableRoomPage> {
       return AppBar(
         backgroundColor: bgColor1,
         centerTitle: true,
-        title: const Text('Jadwal Ruang'),
+        title: Text(widget.ruangan.name),
         elevation: 0,
       );
     }
 
     Widget content() {
-      print('ini adalah booking {search.booking}');
       return Expanded(
         child: Container(
           color: whiteColor,

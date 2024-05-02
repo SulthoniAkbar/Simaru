@@ -12,7 +12,7 @@ class SearchUnvailableService {
     var url = '$baseUrl/rooms/search-unavailable';
     var headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token
+      'Authorization': 'Bearer $token'
     };
     var body = jsonEncode({
       'search': search,
@@ -26,7 +26,7 @@ class SearchUnvailableService {
     print('Request body: $body');
 
     if (response.statusCode == 200) {
-      var data = jsonDecode(response.body)['data']['data'];
+      var data = jsonDecode(response.body)['data'];
       List<SearchModel> searchunvailable = [];
 
       for (var item in data) {

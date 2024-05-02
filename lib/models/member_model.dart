@@ -11,7 +11,7 @@ class MemberModel {
   final String createdAt;
   final String updatedAt;
   final dynamic deletedAt; // This might be null or a DateTime object
-  final DevisionModel division;
+  // final DevisionModel division;
 
   MemberModel({
     this.id,
@@ -24,7 +24,7 @@ class MemberModel {
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
-    this.division,
+    // this.division,
   });
 
   factory MemberModel.fromJson(Map<String, dynamic> json) {
@@ -39,7 +39,7 @@ class MemberModel {
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
       deletedAt: json['deleted_at'],
-      division: DevisionModel.fromJson(json['division']),
+      // division: DevisionModel.fromJson(json['division']),
     );
   }
 }

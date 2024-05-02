@@ -10,15 +10,13 @@ class BookingSearchModel {
   String attachment;
   String createdAt;
   String updatedAt;
-  dynamic deletedAt;
   String name;
   String nip;
   String phone;
   String description;
   String status;
   String participantType;
-  int participantInternal;
-  int participantExternal;
+  int particpant;
   int divisionId;
   MemberModel member;
 
@@ -32,15 +30,13 @@ class BookingSearchModel {
     this.attachment,
     this.createdAt,
     this.updatedAt,
-    this.deletedAt,
     this.name,
     this.nip,
     this.phone,
     this.description,
     this.status,
     this.participantType,
-    this.participantInternal,
-    this.participantExternal,
+    this.particpant,
     this.divisionId,
     this.member,
   });
@@ -56,15 +52,13 @@ class BookingSearchModel {
       attachment: json['attachment'],
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
-      deletedAt: json['deleted_at'],
       name: json['name'],
       nip: json['nip'],
       phone: json['phone'],
       description: json['description'],
       status: json['status'],
       participantType: json['participant_type'],
-      participantInternal: json['participant_internal'],
-      participantExternal: json['participant_external'],
+      particpant: json['participant'],
       divisionId: json['division_id'],
       member: MemberModel.fromJson(json['member']),
     );
