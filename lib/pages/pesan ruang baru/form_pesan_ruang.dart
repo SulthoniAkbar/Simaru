@@ -109,6 +109,38 @@ class _FormPesanRuanganPagePageState extends State<FormPesanRuanganPage> {
           ? DateFormat("yyyy-MM-dd HH:mm:ss").format(enddate)
           : null;
 
+      // Tampilkan dialog loading
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return AlertDialog(
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(width: 8),
+                Text(
+                  'Booking Room...',
+                  style: whiteTextStyle.copyWith(
+                    fontSize: 20,
+                    fontWeight: bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                CircularProgressIndicator(),
+                SizedBox(height: 16),
+                Text('Please wait...'),
+              ],
+            ),
+          );
+        },
+      );
+
       if (await bookingRoomProvider.bookingRoom(
         token: authProvider.user.token,
         name: authProvider.user.name,
@@ -123,6 +155,9 @@ class _FormPesanRuanganPagePageState extends State<FormPesanRuanganPage> {
         participanttype: _radioValue,
         attachment: selectedFilePath,
       )) {
+        // Hapus dialog loading
+        Navigator.of(context).pop();
+
         showDialog(
           context: context,
           builder: (context) {
@@ -175,6 +210,9 @@ class _FormPesanRuanganPagePageState extends State<FormPesanRuanganPage> {
           },
         );
       } else {
+        // Hapus dialog loading
+        Navigator.of(context).pop();
+
         showDialog(
           context: context,
           builder: (context) {

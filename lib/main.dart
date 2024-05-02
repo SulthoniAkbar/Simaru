@@ -6,9 +6,6 @@ import 'package:simaru/pages/jadwal%20ruang/list_unvailable_room.dart';
 import 'package:simaru/pages/jadwal%20ruang/unvailable_room.dart';
 import 'package:simaru/pages/pesan%20ruang%20baru/pesan_ruang_room.dart';
 import 'package:simaru/pages/riwayat%20pemesanan/riwayat_page.dart';
-import 'package:simaru/pages/ruangan/booking_page.dart';
-import 'package:simaru/pages/ruangan/details/booking_room.page.dart';
-import 'package:simaru/pages/schedule/schedule_page.dart';
 import 'package:simaru/pages/signIn_page.dart';
 import 'package:simaru/pages/signUp_page.dart';
 import 'package:simaru/pages/splashscreen_page.dart';
@@ -72,12 +69,10 @@ class MyApp extends StatelessWidget {
           '/faq': (context) => const FaqPage(),
           '/riwayat': (context) => const RiwayatPage(),
           '/feedback': (context) => const FeedbackPage(),
-          '/booking': (context) => const BookingPage(),
           '/jadwalruang': (context) => const JadwalRuangPage(),
           '/listjadwalruang': (context) => const ListJadwalRuang(),
           '/pesanruang': (context) => const PesanRuangPage(),
-          '/bookingroom': (context) => const BookingRoomPage(),
-          '/schedule': (context) => SchedulePage(),
+          // '/schedule': (context) => SchedulePage(),
           '/unvailableroom': (context) => const UnvailbleRoomPage(),
           '/listunvailableroom': (context) => const ListUnvailableRoomPage(),
         },

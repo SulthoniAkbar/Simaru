@@ -8,7 +8,7 @@ class ListUnvailableRoomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Column(
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(12),
@@ -32,79 +32,83 @@ class ListUnvailableRoomCard extends StatelessWidget {
             child: Column(
               children: search.booking.map(
                 (booking) {
-                  return Row(
-                    children: [
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                  if (booking.status == 'DONE') {
+                    return Row(
+                      children: [
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Pemesanan Ruang Rapat',
+                                style: primaryTextStyle3.copyWith(
+                                  fontSize: 12,
+                                  fontWeight: semibold,
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              Text(
+                                "Nama: ",
+                                style: primaryTextStyle3.copyWith(
+                                  fontSize: 12,
+                                  fontWeight: semibold,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 3,
+                              ),
+                              Text(
+                                booking.name,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                "Penggunaan Ruangan: ",
+                                style: primaryTextStyle3.copyWith(
+                                  fontSize: 12,
+                                  fontWeight: semibold,
+                                ),
+                              ),
+                              Text(
+                                '${booking.bookingStartDate} -- ${booking.bookingEndDate}',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 5),
+                        Column(
                           children: [
-                            Text(
-                              'Pemesanan Ruang Rapat',
-                              style: primaryTextStyle3.copyWith(
-                                fontSize: 12,
-                                fontWeight: semibold,
-                              ),
+                            Image.asset(
+                              "assets/booked.png",
+                              width: 60,
+                              height: 60,
                             ),
-                            const SizedBox(height: 6),
-                            Text(
-                              "Nama: ",
-                              style: primaryTextStyle3.copyWith(
-                                fontSize: 12,
-                                fontWeight: semibold,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 3,
+                            const Text(
+                              "Tanggal Pemesanan: ",
+                              style: TextStyle(fontSize: 10),
                             ),
                             Text(
-                              booking.name,
-                              style: const TextStyle(
-                                fontSize: 12,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              "Penggunaan Ruangan: ",
-                              style: primaryTextStyle3.copyWith(
-                                fontSize: 12,
-                                fontWeight: semibold,
-                              ),
-                            ),
-                            Text(
-                              '${booking.bookingStartDate} -- ${booking.bookingEndDate}',
-                              style: const TextStyle(
-                                fontSize: 12,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 30,
+                              booking.bookingDate,
+                              style: const TextStyle(fontSize: 10),
                             ),
                           ],
                         ),
-                      ),
-                      const SizedBox(width: 5),
-                      Column(
-                        children: [
-                          Image.asset(
-                            "assets/booked.png",
-                            width: 60,
-                            height: 60,
-                          ),
-                          const Text(
-                            "Tanggal Pemesanan: ",
-                            style: TextStyle(fontSize: 10),
-                          ),
-                          Text(
-                            booking.bookingDate,
-                            style: const TextStyle(fontSize: 10),
-                          ),
-                        ],
-                      ),
-                    ],
-                  );
+                      ],
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
                 },
               ).toList(),
             ),

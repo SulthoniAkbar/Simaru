@@ -99,20 +99,14 @@ class BookingRoomCard extends StatelessWidget {
                 Expanded(
                   child: TextButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => RoomPage()),
-                      // );
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => RoomPage(
                             roomId: ruangan.id,
                           ),
-                          // builder: (context) => BookingRoomPage(),
                         ),
                       );
-                      // Kode ketika tombol "Lihat" ditekan
                     },
                     style: TextButton.styleFrom(
                       backgroundColor: blueColor,
@@ -139,16 +133,10 @@ class BookingRoomCard extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => FormPesanRuanganPage(
-                            idRoom: this.ruangan.id,
+                            idRoom: ruangan.id,
                           ),
                         ),
                       );
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => ScheduleDetailPage(schedule),
-                      //   ),
-                      // );
                     },
                     style: TextButton.styleFrom(
                       backgroundColor: greenColor,
